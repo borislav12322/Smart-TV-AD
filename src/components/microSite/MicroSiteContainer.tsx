@@ -21,12 +21,22 @@ export const MicroSiteContainer = (): ReactElement => {
       dispatch(setIsBannerShowedACT(true));
     }
   };
+  // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+  const keyBoardNumbersArray: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
   return (
     <MicroSite
       isBannerShowed={isBannerShowed}
       videoRef={videoRef}
       currentTime={currentTime}
+      keyBoardNumbersArray={keyBoardNumbersArray}
     />
   );
 };
+// import React, { ReactElement, useEffect, useRef } from 'react';
+//
+// import { useDispatch, useSelector } from 'react-redux';
+//
+// import { MicroSite } from 'components/microSite/MicroSite';
+// import { setIsBannerShowedACT } from 'store/app-reducer';
+// import { AppRootStateType } from 'store/store';

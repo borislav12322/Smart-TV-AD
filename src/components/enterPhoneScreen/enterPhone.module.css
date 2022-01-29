@@ -1,0 +1,199 @@
+.container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.btnClose{
+    width: 88px;
+    height: 52px;
+    border: 2px solid #000000;
+    background-color: #FFFFFF;
+    color: #000000;
+    font-size: 30px;
+    font-weight: 700;
+    transition: all 0.4s ease;
+}
+
+.btnClose:hover{
+    background-color: #000000;
+    color: #FFFFFF;
+    transition: all 0.4s ease;
+}
+
+.otherInfoBox {
+    padding: 10px 20px 40px 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.qrCodeInfo {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.textInfo {
+    width: 194px;
+    text-align: right;
+    color: #FFFFFF;
+}
+
+.formContainer {
+    padding: 72px 48px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #86D3F4;
+    height: 100%;
+    width: 380px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 13px;
+}
+
+.title {
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: center;
+    width: 290px;
+}
+
+.inputPhone {
+    height: 38px;
+    border: none;
+    background-color: transparent;
+    width: 100%;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 38px;
+}
+
+.text {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    text-align: center;
+    width: 290px;
+}
+
+.phoneForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 284px;
+}
+
+.controls {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 52px);
+    gap: 10px;
+    padding: 20px 0;
+}
+
+.keyNumber {
+    border: 2px solid #000000;
+    background-color: transparent;
+    transition: all 0.4s ease;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+}
+
+.keyNumber:hover {
+    background-color: #000000;
+    color: #FFFFFF;
+    transition: all 0.4s ease;
+}
+
+.keyNumber:nth-child(10) {
+    grid-area: 4/3/5/4;
+}
+
+.clearBtn {
+    grid-area: 4/1/5/3;
+}
+
+.checkBoxWrapper {
+    width: 100%;
+    margin: 13px 0px 20px 0px;
+    padding-left: 10px;
+}
+
+.checkBoxLabel {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.checkBox {
+    position: relative;
+    display: block;
+    width: 40px;
+    height: 40px;
+    outline: 2px solid #000000;
+    background-color: transparent;
+
+}
+
+.checkBox::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 0;
+    background-color: #86D3F4;
+    width: 100%;
+    height: 100%;
+}
+
+.checkBox::before {
+    position: absolute;
+    content: '';
+    background-image: url('../../assets/images/check.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 16px;
+    z-index: 10;
+    display: none;
+
+}
+
+.checkBox:checked.checkBox::before {
+    display: block;
+}
+
+.labelText {
+    color: #565656;
+    max-width: 214px;
+    width: 100%;
+    font-size: 14px;
+}
+
+.submitBtn {
+    width: 100%;
+    color: #4E4E4E;
+}
+
+.submitBtn:hover {
+    background-color: #000000;
+    color: #FFFFFF;
+    transition: all 0.4s ease;
+}
