@@ -5,6 +5,12 @@
     top: 220px;
     background: #86D3F4;
     width: 251px;
+    transition: all 1s ease;
+}
+
+.hidden{
+    right: -100%;
+    transition: all 1s ease;
 }
 
 .wrapper {

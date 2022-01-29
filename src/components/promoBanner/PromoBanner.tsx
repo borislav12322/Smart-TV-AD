@@ -4,8 +4,12 @@ import QRCode from '../../assets/images/qr-code.jpeg';
 
 import s from './prompBanner.module.css';
 
-export const PromoBanner = (): ReactElement => (
-  <div className={s.bannerContainer}>
+type PropsType = {
+  isBannerShowed: boolean;
+};
+
+export const PromoBanner = ({ isBannerShowed }: PropsType): ReactElement => (
+  <div className={`${s.bannerContainer} ${isBannerShowed ? null : s.hidden}`}>
     <div className={s.wrapper}>
       <h2 className={s.bannerTitle}>
         ИСПОЛНИТЕ МЕЧТУ ВАШЕГО МАЛЫША! <br /> ПОДАРИТЕ ЕМУ СОБАКУ!
