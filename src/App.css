@@ -1,0 +1,18 @@
+.App{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.btn{
+    background-color: transparent;
+    border: 1px solid #4E4E4E;
+    min-height: 52px;
+    font-weight: 500;
+    font-size: 16px;
+}
+.btn:focus{
+    color: #86D3F4;
+    background-color: #000000;
+}

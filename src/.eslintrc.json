@@ -87,9 +87,7 @@
       "error",
       {
         "newlines-between": "always",
-        "pathGroupsExcludedImportTypes": [
-          "react"
-        ],
+        "pathGroupsExcludedImportTypes": [],
         "alphabetize": {
           "order": "asc",
           "caseInsensitive": true

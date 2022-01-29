@@ -1,11 +1,11 @@
 import React, { ReactElement } from 'react';
 
 import './App.css';
-import { SiteInfoContainer } from 'components/siteInfo/SiteInfoContainer';
+import { MicroSiteContainer } from 'components/microSite/MicroSiteContainer';
 
 const App = (): ReactElement => (
   <div className="App">
-    <SiteInfoContainer />
+    <MicroSiteContainer />
   </div>
 );
 
