@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import './App.css';
+import { SiteInfoContainer } from 'components/siteInfo/SiteInfoContainer';
 
-const App = (): any => <div className="App">App Test</div>;
+const App = (): ReactElement => (
+  <div className="App">
+    <SiteInfoContainer />
+  </div>
+);
 
 export default App;

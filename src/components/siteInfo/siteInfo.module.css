@@ -1,0 +1,13 @@
+.header{
+    height: 80vh;
+}
+.headerContainer{
+    padding: 0 20px;
+}
+
+.headerWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+}
