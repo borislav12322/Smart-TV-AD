@@ -6,6 +6,7 @@ import { MicroSite } from 'components/microSite/MicroSite';
 import {
   setIsBannerShowedAC,
   setIsEnterPhoneScreenShowedAC,
+  setIsPhoneNumberSendAC,
   setIsVideoPlayingAC,
 } from 'store/app-reducer';
 import { AppRootStateType } from 'store/store';
@@ -22,11 +23,16 @@ export const MicroSiteContainer = (): ReactElement => {
   const isVideoPlaying = useSelector<AppRootStateType, boolean>(
     state => state.appReducer.isVideoPlaying,
   );
+  const isPhoneSend = useSelector<AppRootStateType, boolean>(
+    state => state.appReducer.isPhoneNumberSend,
+  );
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const pauseVideo = (): void | null =>
     videoRef && videoRef.current && videoRef.current.pause();
+  const playVideo = (): Promise<void> | null =>
+    videoRef && videoRef.current && videoRef.current.play();
 
   const showBanner = (): void => {
     if (
@@ -49,6 +55,14 @@ export const MicroSiteContainer = (): ReactElement => {
     dispatch(setIsEnterPhoneScreenShowedAC(true));
     dispatch(setIsVideoPlayingAC(false));
   };
+  const showFinalScreen = (): void => {
+    dispatch(setIsPhoneNumberSendAC(true));
+  };
+  const closeWindow = (): void => {
+    dispatch(setIsEnterPhoneScreenShowedAC(false));
+    dispatch(setIsVideoPlayingAC(true));
+    playVideo();
+  };
 
   return (
     <MicroSite
@@ -59,6 +73,9 @@ export const MicroSiteContainer = (): ReactElement => {
       keyBoardNumbersArray={keyBoardNumbersArray}
       isEnterPhoneScreenShowed={isEnterPhoneScreenShowed}
       showEnterFormScreen={showEnterFormScreen}
+      isPhoneSend={isPhoneSend}
+      showFinalScreen={showFinalScreen}
+      closeWindow={closeWindow}
     />
   );
 };

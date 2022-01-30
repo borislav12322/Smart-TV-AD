@@ -1,18 +1,21 @@
 type ActionsType =
   | SetIsBannerShowedACType
   | SetIsEnterPhoneScreenShowedACType
-  | SetIsVideoPlayingACType;
+  | SetIsVideoPlayingACType
+  | SetIsPhoneNumberSendACType;
 
 type InitialStateType = {
   isBannerShowed: boolean;
   IsEnterPhoneScreenShowed: boolean;
   isVideoPlaying: boolean;
+  isPhoneNumberSend: boolean;
 };
 
 const initialState: InitialStateType = {
   isBannerShowed: false,
   IsEnterPhoneScreenShowed: false,
   isVideoPlaying: true,
+  isPhoneNumberSend: false,
 };
 
 export const appReducer = (
@@ -34,6 +37,11 @@ export const appReducer = (
       return {
         ...state,
         isVideoPlaying: action.isVideoPlaying,
+      };
+    case 'SET-IS-PHONE-NUMBER-SEND':
+      return {
+        ...state,
+        isPhoneNumberSend: action.isPhoneNumberSend,
       };
     default:
       return state;
@@ -64,4 +72,12 @@ export const setIsVideoPlayingAC = (isVideoPlaying: boolean) =>
   ({
     type: 'SET-IS-VIDEO-PLAYING',
     isVideoPlaying,
+  } as const);
+
+export type SetIsPhoneNumberSendACType = ReturnType<typeof setIsPhoneNumberSendAC>;
+
+export const setIsPhoneNumberSendAC = (isPhoneNumberSend: boolean) =>
+  ({
+    type: 'SET-IS-PHONE-NUMBER-SEND',
+    isPhoneNumberSend,
   } as const);

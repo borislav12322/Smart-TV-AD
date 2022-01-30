@@ -15,6 +15,9 @@ type PropsType = {
   keyBoardNumbersArray: number[];
   showEnterFormScreen: () => void;
   isVideoPlaying: boolean;
+  isPhoneSend: boolean;
+  showFinalScreen: () => void;
+  closeWindow: () => void;
 };
 
 export const MicroSite = ({
@@ -25,6 +28,9 @@ export const MicroSite = ({
   isEnterPhoneScreenShowed,
   showEnterFormScreen,
   isVideoPlaying,
+  isPhoneSend,
+  showFinalScreen,
+  closeWindow,
 }: PropsType): ReactElement => (
   <div className={s.container}>
     <div className={s.wrapper}>
@@ -33,12 +39,19 @@ export const MicroSite = ({
         <track default kind="captions" srcLang="en" src="/media/examples/friday.vtt" />
         Captions
       </video>
-      <PromoBanner
-        isBannerShowed={isBannerShowed}
-        showEnterFormScreen={showEnterFormScreen}
-      />
+      {!isEnterPhoneScreenShowed && (
+        <PromoBanner
+          isBannerShowed={isBannerShowed}
+          showEnterFormScreen={showEnterFormScreen}
+        />
+      )}
       {isEnterPhoneScreenShowed && (
-        <EnterPhoneScreen keyBoardNumbersArray={keyBoardNumbersArray} />
+        <EnterPhoneScreen
+          keyBoardNumbersArray={keyBoardNumbersArray}
+          isPhoneSend={isPhoneSend}
+          showFinalScreen={showFinalScreen}
+          closeWindow={closeWindow}
+        />
       )}
     </div>
   </div>

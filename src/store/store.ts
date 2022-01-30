@@ -1,5 +1,6 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+
 import { appReducer } from 'store/app-reducer';
 
 const rootReducer = combineReducers({ appReducer });
