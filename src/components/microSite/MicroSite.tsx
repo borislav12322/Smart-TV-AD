@@ -9,33 +9,37 @@ import { PromoBanner } from 'components/promoBanner/PromoBanner';
 
 type PropsType = {
   isBannerShowed: boolean;
+  isEnterPhoneScreenShowed: boolean;
   videoRef: RefObject<HTMLVideoElement>;
-  currentTime: () => void;
+  showBanner: () => void;
   keyBoardNumbersArray: number[];
+  showEnterFormScreen: () => void;
+  isVideoPlaying: boolean;
 };
 
 export const MicroSite = ({
   isBannerShowed,
   videoRef,
-  currentTime,
+  showBanner,
   keyBoardNumbersArray,
+  isEnterPhoneScreenShowed,
+  showEnterFormScreen,
+  isVideoPlaying,
 }: PropsType): ReactElement => (
   <div className={s.container}>
     <div className={s.wrapper}>
-      <video
-        className={s.video}
-        ref={videoRef}
-        onTimeUpdate={currentTime}
-        autoPlay
-        controls
-        muted
-      >
+      <video className={s.video} ref={videoRef} onTimeUpdate={showBanner} autoPlay muted>
         <source src={Video} type="video/mp4" />
         <track default kind="captions" srcLang="en" src="/media/examples/friday.vtt" />
         Captions
       </video>
-      <PromoBanner isBannerShowed={isBannerShowed} />
-      <EnterPhoneScreen keyBoardNumbersArray={keyBoardNumbersArray} />
+      <PromoBanner
+        isBannerShowed={isBannerShowed}
+        showEnterFormScreen={showEnterFormScreen}
+      />
+      {isEnterPhoneScreenShowed && (
+        <EnterPhoneScreen keyBoardNumbersArray={keyBoardNumbersArray} />
+      )}
     </div>
   </div>
 );

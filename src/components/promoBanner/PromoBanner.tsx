@@ -6,9 +6,13 @@ import s from './prompBanner.module.css';
 
 type PropsType = {
   isBannerShowed: boolean;
+  showEnterFormScreen: () => void;
 };
 
-export const PromoBanner = ({ isBannerShowed }: PropsType): ReactElement => (
+export const PromoBanner = ({
+  isBannerShowed,
+  showEnterFormScreen,
+}: PropsType): ReactElement => (
   <div className={`${s.bannerContainer} ${isBannerShowed ? null : s.hidden}`}>
     <div className={s.wrapper}>
       <h2 className={s.bannerTitle}>
@@ -16,7 +20,12 @@ export const PromoBanner = ({ isBannerShowed }: PropsType): ReactElement => (
       </h2>
       <img className={s.img} src={QRCode} alt="QR Code" />
       <span className={s.text}>Сканируйте QR-код или нажмите ОК</span>
-      <button className="btn" type="button" style={{ padding: '0px 67px' }}>
+      <button
+        className="btn"
+        type="button"
+        onClick={showEnterFormScreen}
+        style={{ padding: '0px 67px' }}
+      >
         OK
       </button>
     </div>
