@@ -7,6 +7,7 @@ import {
   setCheckBoxValueAC,
   setIsBannerShowedAC,
   setIsEnterPhoneScreenShowedAC,
+  setIsErrorShowedAC,
   setIsPhoneNumberSendAC,
   setIsVideoPlayingAC,
   setPhoneNumberAC,
@@ -39,7 +40,9 @@ export const MicroSiteContainer = (): ReactElement => {
   const isChecked = useSelector<AppRootStateType, boolean>(
     state => state.appReducer.checkBoxValue,
   );
-
+  const isErrorShowed = useSelector<AppRootStateType, boolean>(
+    state => state.appReducer.isErrorShowed,
+  );
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const pauseVideo = (): void | null =>
@@ -97,6 +100,11 @@ export const MicroSiteContainer = (): ReactElement => {
     newArr.pop();
     setNumberValue(newArr.join(''));
     dispatch(setPhoneNumberAC(newArr.join('')));
+    if (isErrorShowed) {
+      dispatch(setPhoneNumberAC(''));
+      dispatch(setIsErrorShowedAC(false));
+      dispatch(setCheckBoxValueAC(false));
+    }
   };
   const onChangeHandle = (e: ChangeEvent<HTMLInputElement>): void => {
     dispatch(setCheckBoxValueAC(e.currentTarget.checked));

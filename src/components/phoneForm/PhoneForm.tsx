@@ -44,6 +44,7 @@ export const PhoneForm = ({
           value={phoneNumber}
           mask="+7 (999) 999-99-99"
           alwaysShowMask
+          style={{ color: isErrorShowed ? '#EA0000' : '#000000' }}
         />
         <span className={s.text}>
           и с Вами свяжется наш менеждер для дальнейшей консультации
