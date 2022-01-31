@@ -1,14 +1,26 @@
+import { Dispatch } from 'redux';
+
+import { phoneAPI } from 'DAL/phoneAPI';
+
 type ActionsType =
   | SetIsBannerShowedACType
   | SetIsEnterPhoneScreenShowedACType
   | SetIsVideoPlayingACType
-  | SetIsPhoneNumberSendACType;
+  | SetIsPhoneNumberSendACType
+  | SetPhoneNumberACType
+  | SetCheckBoxValueACType
+  | SetIsPhoneValidateACType
+  | SetIsErrorShowedACType;
 
 type InitialStateType = {
   isBannerShowed: boolean;
   IsEnterPhoneScreenShowed: boolean;
   isVideoPlaying: boolean;
   isPhoneNumberSend: boolean;
+  phoneNumber: string;
+  checkBoxValue: boolean;
+  isPhoneValidate: boolean;
+  isErrorShowed: boolean;
 };
 
 const initialState: InitialStateType = {
@@ -16,6 +28,10 @@ const initialState: InitialStateType = {
   IsEnterPhoneScreenShowed: false,
   isVideoPlaying: true,
   isPhoneNumberSend: false,
+  phoneNumber: '',
+  checkBoxValue: false,
+  isPhoneValidate: false,
+  isErrorShowed: false,
 };
 
 export const appReducer = (
@@ -42,6 +58,26 @@ export const appReducer = (
       return {
         ...state,
         isPhoneNumberSend: action.isPhoneNumberSend,
+      };
+    case 'SET-PHONE-NUMBER':
+      return {
+        ...state,
+        phoneNumber: action.phoneNumber,
+      };
+    case 'SET-CHECKBOX-VALUE':
+      return {
+        ...state,
+        checkBoxValue: action.value,
+      };
+    case 'SET-IS-PHONE-VALIDATE':
+      return {
+        ...state,
+        isPhoneValidate: action.isValidate,
+      };
+    case 'SET-IS-ERROR-SHOWED':
+      return {
+        ...state,
+        isErrorShowed: action.isError,
       };
     default:
       return state;
@@ -81,3 +117,55 @@ export const setIsPhoneNumberSendAC = (isPhoneNumberSend: boolean) =>
     type: 'SET-IS-PHONE-NUMBER-SEND',
     isPhoneNumberSend,
   } as const);
+
+export type SetPhoneNumberACType = ReturnType<typeof setPhoneNumberAC>;
+
+export const setPhoneNumberAC = (phoneNumber: string) =>
+  ({
+    type: 'SET-PHONE-NUMBER',
+    phoneNumber,
+  } as const);
+
+export type SetCheckBoxValueACType = ReturnType<typeof setCheckBoxValueAC>;
+
+export const setCheckBoxValueAC = (value: boolean) =>
+  ({
+    type: 'SET-CHECKBOX-VALUE',
+    value,
+  } as const);
+
+export type SetIsPhoneValidateACType = ReturnType<typeof setIsPhoneValidateAC>;
+
+export const setIsPhoneValidateAC = (isValidate: boolean) =>
+  ({
+    type: 'SET-IS-PHONE-VALIDATE',
+    isValidate,
+  } as const);
+
+export type SetIsErrorShowedACType = ReturnType<typeof setIsErrorShowedAC>;
+
+export const setIsErrorShowedAC = (isError: boolean) =>
+  ({
+    type: 'SET-IS-ERROR-SHOWED',
+    isError,
+  } as const);
+
+export const validateNumberTC =
+  (accessKey: string, number: string, countryCode: string) => (dispatch: Dispatch) => {
+    phoneAPI
+      .validatePhone(accessKey, number, countryCode)
+      .then(res => {
+        console.log(res.data);
+        // @ts-ignore
+        if (res.data.valid === true) {
+          console.log('1212');
+          dispatch(setIsPhoneValidateAC(true));
+        } else {
+          dispatch(setIsPhoneValidateAC(false));
+          dispatch(setIsErrorShowedAC(true));
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };

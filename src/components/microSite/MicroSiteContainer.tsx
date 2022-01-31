@@ -1,19 +1,26 @@
-import React, { ReactElement, useRef } from 'react';
+import React, { ChangeEvent, ReactElement, useEffect, useRef, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import { MicroSite } from 'components/microSite/MicroSite';
 import {
+  setCheckBoxValueAC,
   setIsBannerShowedAC,
   setIsEnterPhoneScreenShowedAC,
   setIsPhoneNumberSendAC,
   setIsVideoPlayingAC,
+  setPhoneNumberAC,
+  validateNumberTC,
 } from 'store/app-reducer';
 import { AppRootStateType } from 'store/store';
 
 export const MicroSiteContainer = (): ReactElement => {
   const dispatch = useDispatch();
+  const [numberValue, setNumberValue] = useState<string>('');
+  const symbolsLength = 10;
   const timeToShowBanner = 2;
+  const phoneRegion = 'RU';
+  const accessKey = '8e7aba359eaf9d94d1f9c3a620d9f628';
   const isBannerShowed = useSelector<AppRootStateType, boolean>(
     state => state.appReducer.isBannerShowed,
   );
@@ -25,6 +32,12 @@ export const MicroSiteContainer = (): ReactElement => {
   );
   const isPhoneSend = useSelector<AppRootStateType, boolean>(
     state => state.appReducer.isPhoneNumberSend,
+  );
+  const phoneNumber = useSelector<AppRootStateType, string>(
+    state => state.appReducer.phoneNumber,
+  );
+  const isChecked = useSelector<AppRootStateType, boolean>(
+    state => state.appReducer.checkBoxValue,
   );
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -48,8 +61,18 @@ export const MicroSiteContainer = (): ReactElement => {
       pauseVideo();
     }
   };
-  // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-  const keyBoardNumbersArray: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+  const keyBoardNumbersArray: string[] = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '0',
+  ];
   const showEnterFormScreen = (): void => {
     dispatch(setIsBannerShowedAC(false));
     dispatch(setIsEnterPhoneScreenShowedAC(true));
@@ -63,6 +86,30 @@ export const MicroSiteContainer = (): ReactElement => {
     dispatch(setIsVideoPlayingAC(true));
     playVideo();
   };
+  const addNumber = (e: any): void => {
+    if (phoneNumber.length < symbolsLength) {
+      setNumberValue(numberValue + e.currentTarget.value);
+      dispatch(setPhoneNumberAC(phoneNumber + e.currentTarget.value));
+    }
+  };
+  const deleteNumber = (): void => {
+    const newArr = numberValue.split('');
+    newArr.pop();
+    setNumberValue(newArr.join(''));
+    dispatch(setPhoneNumberAC(newArr.join('')));
+  };
+  const onChangeHandle = (e: ChangeEvent<HTMLInputElement>): void => {
+    dispatch(setCheckBoxValueAC(e.currentTarget.checked));
+  };
+
+  useEffect(() => {
+    dispatch(setPhoneNumberAC(phoneNumber));
+  }, [phoneNumber, isChecked]);
+  useEffect(() => {
+    if (phoneNumber.length === symbolsLength && isChecked) {
+      dispatch(validateNumberTC(accessKey, phoneNumber, phoneRegion));
+    }
+  }, [phoneNumber, isChecked]);
 
   return (
     <MicroSite
@@ -76,13 +123,9 @@ export const MicroSiteContainer = (): ReactElement => {
       isPhoneSend={isPhoneSend}
       showFinalScreen={showFinalScreen}
       closeWindow={closeWindow}
+      addNumber={addNumber}
+      deleteNumber={deleteNumber}
+      onChangeHandle={onChangeHandle}
     />
   );
 };
-// import React, { ReactElement, useEffect, useRef } from 'react';
-//
-// import { useDispatch, useSelector } from 'react-redux';
-//
-// import { MicroSite } from 'components/microSite/MicroSite';
-// import { setIsBannerShowedACT } from 'store/app-reducer';
-// import { AppRootStateType } from 'store/store';

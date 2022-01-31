@@ -1,4 +1,4 @@
-import React, { RefObject, ReactElement } from 'react';
+import React, { RefObject, ReactElement, ChangeEvent } from 'react';
 
 import Video from '../../assets/videos/volvo.mp4';
 
@@ -12,12 +12,15 @@ type PropsType = {
   isEnterPhoneScreenShowed: boolean;
   videoRef: RefObject<HTMLVideoElement>;
   showBanner: () => void;
-  keyBoardNumbersArray: number[];
+  keyBoardNumbersArray: string[];
   showEnterFormScreen: () => void;
   isVideoPlaying: boolean;
   isPhoneSend: boolean;
   showFinalScreen: () => void;
   closeWindow: () => void;
+  addNumber: (e: any) => void;
+  deleteNumber: () => void;
+  onChangeHandle: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const MicroSite = ({
@@ -31,6 +34,9 @@ export const MicroSite = ({
   isPhoneSend,
   showFinalScreen,
   closeWindow,
+  addNumber,
+  deleteNumber,
+  onChangeHandle,
 }: PropsType): ReactElement => (
   <div className={s.container}>
     <div className={s.wrapper}>
@@ -51,6 +57,9 @@ export const MicroSite = ({
           isPhoneSend={isPhoneSend}
           showFinalScreen={showFinalScreen}
           closeWindow={closeWindow}
+          addNumber={addNumber}
+          deleteNumber={deleteNumber}
+          onChangeHandle={onChangeHandle}
         />
       )}
     </div>

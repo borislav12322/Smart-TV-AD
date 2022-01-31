@@ -21,6 +21,8 @@
     font-size: 32px;
     font-weight: 700;
     line-height: 38px;
+    cursor:auto;
+    outline: none;
 }
 
 .text {
@@ -74,6 +76,17 @@
     width: 100%;
     margin: 13px 0px 20px 0px;
     padding-left: 10px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.errorText{
+    color: #EA0000;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
 }
 
 .checkBoxLabel {
