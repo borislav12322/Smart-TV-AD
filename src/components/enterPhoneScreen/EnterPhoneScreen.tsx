@@ -1,30 +1,20 @@
-import React, { ChangeEvent, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 import QRCode from '../../assets/images/qr-code.jpeg';
 
 import s from './enterPhone.module.css';
 
 import { FinalScreen } from 'components/finalScreen/FinalScreen';
-import { PhoneForm } from 'components/phoneForm/PhoneForm';
+import { PhoneFormContainer } from 'components/phoneForm/PhoneFormContainer';
 
 type PropsType = {
-  keyBoardNumbersArray: string[];
   isPhoneSend: boolean;
-  showFinalScreen: () => void;
   closeWindow: () => void;
-  addNumber: (e: any) => void;
-  deleteNumber: () => void;
-  onChangeHandle: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const EnterPhoneScreen = ({
-  keyBoardNumbersArray,
   isPhoneSend,
-  showFinalScreen,
   closeWindow,
-  addNumber,
-  deleteNumber,
-  onChangeHandle,
 }: PropsType): ReactElement => (
   <div className={s.container}>
     <div className={s.otherInfoBox}>
@@ -39,17 +29,7 @@ export const EnterPhoneScreen = ({
       </div>
     </div>
     <div className={s.formContainer}>
-      {isPhoneSend ? (
-        <FinalScreen />
-      ) : (
-        <PhoneForm
-          keyBoardNumbersArray={keyBoardNumbersArray}
-          showFinalScreen={showFinalScreen}
-          addNumber={addNumber}
-          deleteNumber={deleteNumber}
-          onChangeHandle={onChangeHandle}
-        />
-      )}
+      {isPhoneSend ? <FinalScreen /> : <PhoneFormContainer />}
     </div>
   </div>
 );

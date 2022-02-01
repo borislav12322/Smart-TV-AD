@@ -52,15 +52,7 @@ export const MicroSite = ({
         />
       )}
       {isEnterPhoneScreenShowed && (
-        <EnterPhoneScreen
-          keyBoardNumbersArray={keyBoardNumbersArray}
-          isPhoneSend={isPhoneSend}
-          showFinalScreen={showFinalScreen}
-          closeWindow={closeWindow}
-          addNumber={addNumber}
-          deleteNumber={deleteNumber}
-          onChangeHandle={onChangeHandle}
-        />
+        <EnterPhoneScreen isPhoneSend={isPhoneSend} closeWindow={closeWindow} />
       )}
     </div>
   </div>

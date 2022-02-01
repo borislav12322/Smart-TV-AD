@@ -1,105 +1,99 @@
 import React, { ChangeEvent, ReactElement } from 'react';
 
 import InputMask from 'react-input-mask';
-import { useSelector } from 'react-redux';
 
 import s from './phoneForm.module.css';
 
-import { AppRootStateType } from 'store/store';
+import { ButtonsControlType } from 'components/phoneForm/PhoneFormContainer';
 
 type PropsType = {
-  keyBoardNumbersArray: string[];
   showFinalScreen: () => void;
   deleteNumber: () => void;
   addNumber: (e: any) => void;
-  onChangeHandle: (e: ChangeEvent<HTMLInputElement>) => void;
+  checkBoxChangeHandle: (e: ChangeEvent<HTMLInputElement>) => void;
+  isChecked: boolean;
+  isPhoneValidate: boolean;
+  symbolsLength: number;
+  phoneNumber: string;
+  isErrorShowed: boolean;
+  buttonsControl: ButtonsControlType[];
 };
 
 export const PhoneForm = ({
-  keyBoardNumbersArray,
+  buttonsControl,
   showFinalScreen,
   addNumber,
   deleteNumber,
-  onChangeHandle,
-}: PropsType): ReactElement => {
-  const phoneNumber = useSelector<AppRootStateType, string>(
-    state => state.appReducer.phoneNumber,
-  );
-  const isChecked = useSelector<AppRootStateType, boolean>(
-    state => state.appReducer.checkBoxValue,
-  );
-  const isPhoneValidate = useSelector<AppRootStateType, boolean>(
-    state => state.appReducer.isPhoneValidate,
-  );
-  const isErrorShowed = useSelector<AppRootStateType, boolean>(
-    state => state.appReducer.isErrorShowed,
-  );
-  const symbolsLength = 10;
-  return (
-    <div className={s.formContainer}>
-      <div className={s.wrapper}>
-        <h2 className={s.title}>Введите ваш номер мобильного телефона</h2>
-        <InputMask
-          className={s.inputPhone}
-          value={phoneNumber}
-          mask="+7 (999) 999-99-99"
-          alwaysShowMask
-          style={{ color: isErrorShowed ? '#EA0000' : '#000000' }}
-        />
-        <span className={s.text}>
-          и с Вами свяжется наш менеждер для дальнейшей консультации
-        </span>
-        <form className={s.phoneForm}>
-          <div className={s.controls}>
-            {keyBoardNumbersArray.map(number => (
-              <button
-                className={s.keyNumber}
-                value={number}
-                type="button"
-                key={number}
-                onClick={addNumber}
-                disabled={phoneNumber.length === symbolsLength}
-              >
-                {number}
-              </button>
-            ))}
+  checkBoxChangeHandle,
+  isChecked,
+  isPhoneValidate,
+  symbolsLength,
+  phoneNumber,
+  isErrorShowed,
+}: PropsType): ReactElement => (
+  <div className={s.formContainer}>
+    <div className={s.wrapper}>
+      <h2 className={s.title}>Введите ваш номер мобильного телефона</h2>
+      <InputMask
+        className={s.inputPhone}
+        value={phoneNumber}
+        mask="+7 (999) 999-99-99"
+        type="tel"
+        alwaysShowMask
+        style={{ color: isErrorShowed ? '#EA0000' : '#000000' }}
+      />
+      <span className={s.text}>
+        и с Вами свяжется наш менеждер для дальнейшей консультации
+      </span>
+      <form className={s.phoneForm}>
+        <div className={s.controls}>
+          {buttonsControl.map(item => (
             <button
-              className={`${s.clearBtn} ${s.keyNumber}`}
+              className={item.className}
               type="button"
-              onClick={deleteNumber}
+              key={item.id}
+              onClick={addNumber}
+              disabled={phoneNumber.length >= symbolsLength}
             >
-              СТЕРЕТЬ
+              {item.value}
             </button>
-          </div>
-          <div className={s.checkBoxWrapper}>
-            {!isErrorShowed ? (
-              <label htmlFor="phoneForm" className={s.checkBoxLabel}>
-                <input
-                  className={s.checkBox}
-                  checked={isChecked}
-                  id="checkbox"
-                  type="checkbox"
-                  onChange={onChangeHandle}
-                />
-                <span className={s.labelText}>
-                  Согласие на обработку персональных данных
-                </span>
-              </label>
-            ) : (
-              <span className={s.errorText}>НЕВЕРНО ВВЕДЕН НОМЕР</span>
-            )}
-          </div>
+          ))}
           <button
+            className={`${s.clearBtn} ${s.keyNumber}`}
             type="button"
-            className={`${s.submitBtn} btn`}
-            style={{ width: '100%' }}
-            onClick={showFinalScreen}
-            disabled={!isPhoneValidate}
+            onClick={deleteNumber}
           >
-            ПОДТВЕРДИТЬ НОМЕР
+            СТЕРЕТЬ
           </button>
-        </form>
-      </div>
+        </div>
+        <div className={s.checkBoxWrapper}>
+          {!isErrorShowed ? (
+            <label htmlFor="phoneForm" className={s.checkBoxLabel}>
+              <input
+                className={s.checkBox}
+                checked={isChecked}
+                id="checkbox"
+                type="checkbox"
+                onChange={checkBoxChangeHandle}
+              />
+              <span className={s.labelText}>
+                Согласие на обработку персональных данных
+              </span>
+            </label>
+          ) : (
+            <span className={s.errorText}>НЕВЕРНО ВВЕДЕН НОМЕР</span>
+          )}
+        </div>
+        <button
+          type="button"
+          className={`${s.submitBtn} btn`}
+          style={{ width: '100%' }}
+          onClick={showFinalScreen}
+          disabled={!isPhoneValidate}
+        >
+          ПОДТВЕРДИТЬ НОМЕР
+        </button>
+      </form>
     </div>
-  );
-};
+  </div>
+);

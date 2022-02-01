@@ -148,6 +148,11 @@
     color: #4E4E4E;
 }
 
+.btn.active{
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
 .submitBtn:hover {
     background-color: #000000;
     color: #FFFFFF;
