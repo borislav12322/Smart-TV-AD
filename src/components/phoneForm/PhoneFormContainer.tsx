@@ -36,7 +36,15 @@ export const PhoneFormContainer = (): ReactElement => {
   const buttonsControl = useSelector<AppRootStateType, ButtonsControlType[]>(
     state => state.PhoneFormReducer.buttonsControl,
   );
+  const keyValue = useSelector<AppRootStateType, string>(
+    state => state.PhoneFormReducer.keyPosition,
+  );
   const symbolsLength = 10;
+  const buttonsNumberArray = buttonsControl.filter(
+    item => +item.id <= +'9' || item.id === '100',
+  );
+  const checkboxItem = buttonsControl.filter(item => item.id === '110');
+  const buttonSend = buttonsControl.filter(item => item.id === '120');
 
   const deleteNumber = (): void => {
     const newArr = phoneNumber.split('');
@@ -65,6 +73,7 @@ export const PhoneFormContainer = (): ReactElement => {
 
   useEffect(() => {
     dispatch(setPhoneNumberAC(phoneNumber));
+    console.log(checkboxItem);
   }, [phoneNumber, dispatch]);
 
   return (
@@ -79,6 +88,10 @@ export const PhoneFormContainer = (): ReactElement => {
       phoneNumber={phoneNumber}
       isErrorShowed={isErrorShowed}
       buttonsControl={buttonsControl}
+      buttonsNumberArray={buttonsNumberArray}
+      checkboxItem={checkboxItem}
+      keyValue={keyValue}
+      buttonSend={buttonSend}
     />
   );
 };

@@ -18,6 +18,12 @@ const initialState: InitialStateType = {
     { id: '9', value: '9', className: 'btn' },
     { id: '0', value: '0', className: 'btn' },
     { id: '100', value: 'Стереть', className: 'btn' },
+    {
+      id: '110',
+      value: 'Согласие на обработку персональных данных',
+      className: 'checkbox',
+    },
+    { id: '120', value: 'ПОДТВЕРДИТЬ НОМЕР', className: 'btn' },
   ],
   keyPosition: '5',
 };

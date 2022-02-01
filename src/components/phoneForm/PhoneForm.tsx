@@ -17,6 +17,10 @@ type PropsType = {
   phoneNumber: string;
   isErrorShowed: boolean;
   buttonsControl: ButtonsControlType[];
+  buttonsNumberArray: ButtonsControlType[];
+  checkboxItem: ButtonsControlType[];
+  buttonSend: ButtonsControlType[];
+  keyValue: string;
 };
 
 export const PhoneForm = ({
@@ -30,6 +34,10 @@ export const PhoneForm = ({
   symbolsLength,
   phoneNumber,
   isErrorShowed,
+  buttonsNumberArray,
+  checkboxItem,
+  keyValue,
+  buttonSend,
 }: PropsType): ReactElement => (
   <div className={s.formContainer}>
     <div className={s.wrapper}>
@@ -47,7 +55,7 @@ export const PhoneForm = ({
       </span>
       <form className={s.phoneForm}>
         <div className={s.controls}>
-          {buttonsControl.map(item => (
+          {buttonsNumberArray.map(item => (
             <button
               className={item.className}
               type="button"
@@ -58,24 +66,33 @@ export const PhoneForm = ({
               {item.value}
             </button>
           ))}
-          <button
-            className={`${s.clearBtn} ${s.keyNumber}`}
-            type="button"
-            onClick={deleteNumber}
-          >
-            СТЕРЕТЬ
-          </button>
+          {/* <button */}
+          {/*  className={`${s.clearBtn} ${s.keyNumber}`} */}
+          {/*  type="button" */}
+          {/*  onClick={deleteNumber} */}
+          {/* > */}
+          {/*  СТЕРЕТЬ */}
+          {/* </button> */}
         </div>
-        <div className={s.checkBoxWrapper}>
+        <div
+          className={s.checkBoxWrapper}
+          style={{
+            background: keyValue === '110' ? 'rgba(78, 78, 78, 0.35)' : 'transparent',
+          }}
+        >
           {!isErrorShowed ? (
             <label htmlFor="phoneForm" className={s.checkBoxLabel}>
-              <input
-                className={s.checkBox}
-                checked={isChecked}
-                id="checkbox"
-                type="checkbox"
-                onChange={checkBoxChangeHandle}
-              />
+              {checkboxItem.map(item => (
+                <input
+                  key={item.id}
+                  className={`${item.className} ${s.checkBox}`}
+                  checked={isChecked}
+                  id={item.id}
+                  type="checkbox"
+                  onChange={checkBoxChangeHandle}
+                  style={{}}
+                />
+              ))}
               <span className={s.labelText}>
                 Согласие на обработку персональных данных
               </span>
@@ -84,15 +101,18 @@ export const PhoneForm = ({
             <span className={s.errorText}>НЕВЕРНО ВВЕДЕН НОМЕР</span>
           )}
         </div>
-        <button
-          type="button"
-          className={`${s.submitBtn} btn`}
-          style={{ width: '100%' }}
-          onClick={showFinalScreen}
-          disabled={!isPhoneValidate}
-        >
-          ПОДТВЕРДИТЬ НОМЕР
-        </button>
+        {buttonSend.map(item => (
+          <button
+            key={item.id}
+            type="button"
+            className={`${s.submitBtn} ${item.className}`}
+            style={{ width: '100%' }}
+            onClick={showFinalScreen}
+            disabled={!isPhoneValidate}
+          >
+            ПОДТВЕРДИТЬ НОМЕР
+          </button>
+        ))}
       </form>
     </div>
   </div>

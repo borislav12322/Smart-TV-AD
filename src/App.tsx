@@ -6,7 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { MicroSiteContainer } from 'components/microSite/MicroSiteContainer';
 import { ButtonsControlType } from 'components/phoneForm/PhoneFormContainer';
-import { setPhoneNumberAC } from 'store/app-reducer';
+import {
+  setCheckBoxValueAC,
+  setIsPhoneNumberSendAC,
+  setPhoneNumberAC,
+} from 'store/app-reducer';
 import { changeButtonPositionAC, changeKeyValueAC } from 'store/PhoneForm-reducer';
 import { AppRootStateType } from 'store/store';
 
@@ -14,6 +18,7 @@ const App = (): ReactElement => {
   const dispatch = useDispatch();
   const appRef = useRef<HTMLDivElement>(null);
   const phoneLength = 10;
+  const defaultPhoneLength = 0;
   const buttonNumpad = useSelector<AppRootStateType, ButtonsControlType[]>(
     state => state.PhoneFormReducer.buttonsControl,
   );
@@ -22,6 +27,12 @@ const App = (): ReactElement => {
   );
   const phoneNumber = useSelector<AppRootStateType, string>(
     state => state.appReducer.phoneNumber,
+  );
+  const isPhoneValidate = useSelector<AppRootStateType, boolean>(
+    state => state.appReducer.isPhoneValidate,
+  );
+  const checkBoxValue = useSelector<AppRootStateType, boolean>(
+    state => state.appReducer.checkBoxValue,
   );
 
   const focusOnApp = (): void => {
@@ -76,7 +87,7 @@ const App = (): ReactElement => {
       console.log('Arrow Left');
     }
     if (keyValue === '3' && e.key === 'ArrowRight') {
-      dispatch(changeKeyValueAC('5'));
+      // dispatch(changeKeyValueAC('5'));
       console.log('Arrow Right');
     }
     if (keyValue === '4' && e.key === 'ArrowUp') {
@@ -132,7 +143,7 @@ const App = (): ReactElement => {
       console.log('Arrow Up');
     }
     if (keyValue === '7' && e.key === 'ArrowDown') {
-      // dispatch(changeKeyValueAC('9'));
+      dispatch(changeKeyValueAC('100'));
       console.log('Arrow Down');
     }
     if (keyValue === '7' && e.key === 'ArrowLeft') {
@@ -148,7 +159,7 @@ const App = (): ReactElement => {
       console.log('Arrow Up');
     }
     if (keyValue === '8' && e.key === 'ArrowDown') {
-      // dispatch(changeKeyValueAC('Delete'));
+      dispatch(changeKeyValueAC('100'));
       console.log('Arrow Down');
     }
     if (keyValue === '8' && e.key === 'ArrowLeft') {
@@ -172,8 +183,64 @@ const App = (): ReactElement => {
       console.log('Arrow Left');
     }
     if (keyValue === '9' && e.key === 'ArrowRight') {
-      dispatch(changeKeyValueAC('Close'));
+      // dispatch(changeKeyValueAC('Close'));
       console.log('Arrow Right');
+    }
+    if (keyValue === '0' && e.key === 'ArrowUp') {
+      dispatch(changeKeyValueAC('9'));
+      console.log('Arrow Up');
+    }
+    if (keyValue === '0' && e.key === 'ArrowDown') {
+      // dispatch(changeKeyValueAC('0'));
+      console.log('Arrow Down');
+    }
+    if (keyValue === '0' && e.key === 'ArrowLeft') {
+      dispatch(changeKeyValueAC('100'));
+      console.log('Arrow Left');
+    }
+    if (keyValue === '0' && e.key === 'ArrowRight') {
+      // dispatch(changeKeyValueAC('Close'));
+      console.log('Arrow Right');
+    }
+    if (keyValue === '100' && e.key === 'ArrowUp') {
+      dispatch(changeKeyValueAC('8'));
+      console.log('Arrow Up');
+    }
+    if (keyValue === '100' && e.key === 'ArrowDown') {
+      dispatch(changeKeyValueAC('110'));
+      console.log('Arrow Down');
+    }
+    if (keyValue === '100' && e.key === 'ArrowLeft') {
+      // dispatch(changeKeyValueAC('8'));
+      console.log('Arrow Left');
+    }
+    if (keyValue === '100' && e.key === 'ArrowRight') {
+      dispatch(changeKeyValueAC('0'));
+      console.log('Arrow Right');
+    }
+    if (keyValue === '110' && e.key === 'ArrowUp') {
+      dispatch(changeKeyValueAC('100'));
+      console.log('Arrow Up');
+    }
+    if (keyValue === '110' && e.key === 'ArrowDown' && isPhoneValidate) {
+      dispatch(changeKeyValueAC('120'));
+      console.log('Arrow Down');
+    }
+    if (keyValue === '110' && e.key === 'ArrowLeft') {
+      // dispatch(changeKeyValueAC('8'));
+      console.log('Arrow Left');
+    }
+    if (keyValue === '110' && e.key === 'ArrowRight') {
+      dispatch(changeKeyValueAC('0'));
+      console.log('Arrow Right');
+    }
+
+    if (keyValue === '120' && e.key === 'ArrowUp') {
+      dispatch(changeKeyValueAC('110'));
+      console.log('Arrow Up');
+    }
+    if (keyValue === '120' && e.key === 'ArrowDown') {
+      console.log('Arrow Down');
     }
 
     if (keyValue === '1' && e.key === 'Enter') {
@@ -206,9 +273,13 @@ const App = (): ReactElement => {
         dispatch(setPhoneNumberAC(`${phoneNumber}6`));
       }
     }
-    if (keyValue === '7' && e.key === 'Enter') {
+    if (
+      keyValue === '7' &&
+      e.key === 'Enter' &&
+      phoneNumber.length !== defaultPhoneLength
+    ) {
       if (phoneNumber.length < phoneLength) {
-        // dispatch(setPhoneNumberAC(`${phoneNumber}7`));
+        dispatch(setPhoneNumberAC(`${phoneNumber}7`));
         console.log('Enter 7');
       }
     }
@@ -222,14 +293,34 @@ const App = (): ReactElement => {
         dispatch(setPhoneNumberAC(`${phoneNumber}9`));
       }
     }
+    if (keyValue === '0' && e.key === 'Enter') {
+      if (phoneNumber.length < phoneLength) {
+        dispatch(setPhoneNumberAC(`${phoneNumber}0`));
+      }
+    }
+    if (keyValue === '100' && e.key === 'Enter') {
+      console.log('Delete');
+    }
+    if (keyValue === '110' && e.key === 'Enter') {
+      if (checkBoxValue) {
+        dispatch(setCheckBoxValueAC(false));
+      } else {
+        dispatch(setCheckBoxValueAC(true));
+      }
+      console.log('Checked');
+    }
+    if (keyValue === '120' && e.key === 'Enter' && isPhoneValidate) {
+      dispatch(setIsPhoneNumberSendAC(true));
+    }
   };
 
   useEffect(() => {
     focusOnApp();
-    console.log(`button numpad is ${buttonNumpad}`);
+    // console.log(`button numpad is ${buttonNumpad}`);
     console.log(`key value is ${keyValue}`);
     console.log(`phone number is ${phoneNumber}`);
-  }, [appRef, buttonNumpad, keyValue, phoneNumber]);
+    console.log(`Checked is ${checkBoxValue}`);
+  }, [appRef, buttonNumpad, keyValue, phoneNumber, checkBoxValue]);
 
   useEffect(() => {
     dispatch(changeButtonPositionAC(keyValue));
