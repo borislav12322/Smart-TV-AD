@@ -91,7 +91,6 @@ export const MicroSiteContainer = (): ReactElement => {
   };
   const addNumber = (e: any): void => {
     if (phoneNumber.length < symbolsLength) {
-      setNumberValue(numberValue + e.currentTarget.value);
       dispatch(setPhoneNumberAC(phoneNumber + e.currentTarget.value));
     }
   };
@@ -113,6 +112,11 @@ export const MicroSiteContainer = (): ReactElement => {
   useEffect(() => {
     dispatch(setPhoneNumberAC(phoneNumber));
   }, [phoneNumber, isChecked]);
+  useEffect(() => {
+    if (isVideoPlaying && !isEnterPhoneScreenShowed) {
+      playVideo();
+    }
+  }, [isVideoPlaying]);
   useEffect(() => {
     if (phoneNumber.length === symbolsLength && isChecked) {
       dispatch(validateNumberTC(accessKey, phoneNumber, phoneRegion));

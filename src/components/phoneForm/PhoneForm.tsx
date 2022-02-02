@@ -8,8 +8,7 @@ import { ButtonsControlType } from 'components/phoneForm/PhoneFormContainer';
 
 type PropsType = {
   showFinalScreen: () => void;
-  deleteNumber: () => void;
-  addNumber: (e: any) => void;
+  deleteNumber: (id: string) => void;
   checkBoxChangeHandle: (e: ChangeEvent<HTMLInputElement>) => void;
   isChecked: boolean;
   isPhoneValidate: boolean;
@@ -20,13 +19,15 @@ type PropsType = {
   buttonsNumberArray: ButtonsControlType[];
   checkboxItem: ButtonsControlType[];
   buttonSend: ButtonsControlType[];
+  closeBtn: ButtonsControlType[];
+  buttonDelete: ButtonsControlType[];
   keyValue: string;
+  addNumber: (id: string) => void;
 };
 
 export const PhoneForm = ({
   buttonsControl,
   showFinalScreen,
-  addNumber,
   deleteNumber,
   checkBoxChangeHandle,
   isChecked,
@@ -38,6 +39,9 @@ export const PhoneForm = ({
   checkboxItem,
   keyValue,
   buttonSend,
+  addNumber,
+  closeBtn,
+  buttonDelete,
 }: PropsType): ReactElement => (
   <div className={s.formContainer}>
     <div className={s.wrapper}>
@@ -55,24 +59,38 @@ export const PhoneForm = ({
       </span>
       <form className={s.phoneForm}>
         <div className={s.controls}>
-          {buttonsNumberArray.map(item => (
-            <button
-              className={item.className}
-              type="button"
-              key={item.id}
-              onClick={addNumber}
-              disabled={phoneNumber.length >= symbolsLength}
-            >
-              {item.value}
-            </button>
-          ))}
-          {/* <button */}
-          {/*  className={`${s.clearBtn} ${s.keyNumber}`} */}
-          {/*  type="button" */}
-          {/*  onClick={deleteNumber} */}
-          {/* > */}
-          {/*  СТЕРЕТЬ */}
-          {/* </button> */}
+          {buttonsNumberArray.map(item => {
+            const onClickHandle = (): void => {
+              addNumber(item.id);
+            };
+
+            return (
+              <button
+                className={item.className}
+                type="button"
+                key={item.id}
+                onClick={onClickHandle}
+                disabled={phoneNumber.length >= symbolsLength}
+              >
+                {item.value}
+              </button>
+            );
+          })}
+          {buttonDelete.map(item => {
+            const onClickHandle = (): void => {
+              deleteNumber(item.id);
+            };
+            return (
+              <button
+                type="button"
+                className={item.className}
+                onClick={onClickHandle}
+                key={item.id}
+              >
+                {item.value}
+              </button>
+            );
+          })}
         </div>
         <div
           className={s.checkBoxWrapper}

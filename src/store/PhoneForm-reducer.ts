@@ -24,6 +24,7 @@ const initialState: InitialStateType = {
       className: 'checkbox',
     },
     { id: '120', value: 'ПОДТВЕРДИТЬ НОМЕР', className: 'btn' },
+    { id: '130', value: 'Close', className: 'btn' },
   ],
   keyPosition: '5',
 };

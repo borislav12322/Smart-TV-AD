@@ -8,7 +8,7 @@
 
 button.btn{
     background-color: transparent;
-    border: 1px solid #4E4E4E;
+    border: 2px solid #4E4E4E;
     min-height: 52px;
     font-weight: 500;
     font-size: 16px;
@@ -16,6 +16,9 @@ button.btn{
 button.btn:focus{
     color: #86D3F4;
     background-color: #000000;
+}
+button.btn:disabled{
+    background-color: rgba(78, 78, 78, 0.35);
 }
 
 button.btn.active{
