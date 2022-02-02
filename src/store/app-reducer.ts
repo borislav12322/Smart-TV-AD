@@ -156,9 +156,7 @@ export const validateNumberTC =
       .validatePhone(accessKey, number, countryCode)
       .then(res => {
         console.log(res.data);
-        // @ts-ignore
         if (res.data.valid === true) {
-          console.log('1212');
           dispatch(setIsPhoneValidateAC(true));
         } else {
           dispatch(setIsPhoneValidateAC(false));

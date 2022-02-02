@@ -18,9 +18,8 @@ export type ButtonsControlType = {
   className: string;
 };
 
-export const PhoneFormContainer = (): ReactElement => {
+export const PhoneFormContainer = React.memo((): ReactElement => {
   const dispatch = useDispatch();
-  // const phoneLength = 10;
 
   const phoneNumber = useSelector<AppRootStateType, string>(
     state => state.appReducer.phoneNumber,
@@ -41,18 +40,17 @@ export const PhoneFormContainer = (): ReactElement => {
     state => state.PhoneFormReducer.keyPosition,
   );
   const symbolsLength = 10;
+  const defaultNumberCount = 0;
   const buttonsNumberArray = buttonsControl.filter(item => +item.id <= +'9');
   const buttonDelete = buttonsControl.filter(item => item.id === '100');
   const checkboxItem = buttonsControl.filter(item => item.id === '110');
   const buttonSend = buttonsControl.filter(item => item.id === '120');
-  const closeBtn = buttonsControl.filter(item => item.id === '130');
 
   const deleteNumber = (id: string): void => {
     const newArr = phoneNumber.split('');
     newArr.pop();
     dispatch(changeKeyValueAC(id));
     dispatch(setPhoneNumberAC(newArr.join('')));
-    console.log('Delete');
     if (isErrorShowed) {
       dispatch(setPhoneNumberAC(''));
       dispatch(setIsErrorShowedAC(false));
@@ -74,12 +72,10 @@ export const PhoneFormContainer = (): ReactElement => {
 
   useEffect(() => {
     dispatch(setPhoneNumberAC(phoneNumber));
-    console.log(checkboxItem);
   }, [phoneNumber, dispatch]);
   useEffect(() => {
     if (phoneNumber.length >= symbolsLength) {
       dispatch(changeKeyValueAC('100'));
-      console.log('1000000');
     }
   }, [phoneNumber, dispatch]);
 
@@ -91,16 +87,15 @@ export const PhoneFormContainer = (): ReactElement => {
       isChecked={isChecked}
       isPhoneValidate={isPhoneValidate}
       symbolsLength={symbolsLength}
+      defaultNumberCount={defaultNumberCount}
       phoneNumber={phoneNumber}
       isErrorShowed={isErrorShowed}
-      buttonsControl={buttonsControl}
       buttonsNumberArray={buttonsNumberArray}
       checkboxItem={checkboxItem}
       keyValue={keyValue}
       buttonSend={buttonSend}
-      closeBtn={closeBtn}
       addNumber={addNumber}
       buttonDelete={buttonDelete}
     />
   );
-};
+});

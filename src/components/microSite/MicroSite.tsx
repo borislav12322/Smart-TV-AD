@@ -1,42 +1,22 @@
-import React, { RefObject, ReactElement, ChangeEvent } from 'react';
+import React, { RefObject, ReactElement } from 'react';
 
 import Video from '../../assets/videos/volvo.mp4';
 
 import s from './microSite.module.css';
 
-import { EnterPhoneScreen } from 'components/enterPhoneScreen/EnterPhoneScreen';
-import { PromoBanner } from 'components/promoBanner/PromoBanner';
+import { EnterPhoneScreenContainer } from 'components/enterPhoneScreen/EnterPhoneScreenContainer';
+import { PromoBannerContainer } from 'components/promoBanner/PromoBannerContainer';
 
 type PropsType = {
-  isBannerShowed: boolean;
   isEnterPhoneScreenShowed: boolean;
   videoRef: RefObject<HTMLVideoElement>;
   showBanner: () => void;
-  keyBoardNumbersArray: string[];
-  showEnterFormScreen: () => void;
-  isVideoPlaying: boolean;
-  isPhoneSend: boolean;
-  showFinalScreen: () => void;
-  closeWindow: () => void;
-  addNumber: (e: any) => void;
-  deleteNumber: () => void;
-  onChangeHandle: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const MicroSite = ({
-  isBannerShowed,
   videoRef,
   showBanner,
-  keyBoardNumbersArray,
   isEnterPhoneScreenShowed,
-  showEnterFormScreen,
-  isVideoPlaying,
-  isPhoneSend,
-  showFinalScreen,
-  closeWindow,
-  addNumber,
-  deleteNumber,
-  onChangeHandle,
 }: PropsType): ReactElement => (
   <div className={s.container}>
     <div className={s.wrapper}>
@@ -45,15 +25,8 @@ export const MicroSite = ({
         <track default kind="captions" srcLang="en" src="/media/examples/friday.vtt" />
         Captions
       </video>
-      {!isEnterPhoneScreenShowed && (
-        <PromoBanner
-          isBannerShowed={isBannerShowed}
-          showEnterFormScreen={showEnterFormScreen}
-        />
-      )}
-      {isEnterPhoneScreenShowed && (
-        <EnterPhoneScreen isPhoneSend={isPhoneSend} closeWindow={closeWindow} />
-      )}
+      {!isEnterPhoneScreenShowed && <PromoBannerContainer />}
+      {isEnterPhoneScreenShowed && <EnterPhoneScreenContainer />}
     </div>
   </div>
 );

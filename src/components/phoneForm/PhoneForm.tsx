@@ -13,20 +13,18 @@ type PropsType = {
   isChecked: boolean;
   isPhoneValidate: boolean;
   symbolsLength: number;
+  defaultNumberCount: number;
   phoneNumber: string;
   isErrorShowed: boolean;
-  buttonsControl: ButtonsControlType[];
   buttonsNumberArray: ButtonsControlType[];
   checkboxItem: ButtonsControlType[];
   buttonSend: ButtonsControlType[];
-  closeBtn: ButtonsControlType[];
   buttonDelete: ButtonsControlType[];
   keyValue: string;
   addNumber: (id: string) => void;
 };
 
 export const PhoneForm = ({
-  buttonsControl,
   showFinalScreen,
   deleteNumber,
   checkBoxChangeHandle,
@@ -40,8 +38,8 @@ export const PhoneForm = ({
   keyValue,
   buttonSend,
   addNumber,
-  closeBtn,
   buttonDelete,
+  defaultNumberCount,
 }: PropsType): ReactElement => (
   <div className={s.formContainer}>
     <div className={s.wrapper}>
@@ -61,7 +59,7 @@ export const PhoneForm = ({
         <div className={s.controls}>
           {buttonsNumberArray.map(item => {
             const onClickHandle = (): void => {
-              if (item.id === '7' && phoneNumber.length === +'0') {
+              if (item.id === '7' && phoneNumber.length === defaultNumberCount) {
                 console.log('not seven');
               } else {
                 addNumber(item.id);
