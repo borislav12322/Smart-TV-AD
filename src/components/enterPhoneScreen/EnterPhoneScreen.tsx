@@ -6,7 +6,7 @@ import QRCode from '../../assets/images/qr-code.jpeg';
 
 import s from './enterPhone.module.css';
 
-import { FinalScreen } from 'components/finalScreen/FinalScreen';
+import { FinalTextBlock } from 'components/finalTextBlock/FinalTextBlock';
 import {
   ButtonsControlType,
   PhoneFormContainer,
@@ -49,7 +49,7 @@ export const EnterPhoneScreen = ({
         </div>
       </div>
       <div className={s.formContainer}>
-        {isPhoneSend ? <FinalScreen /> : <PhoneFormContainer />}
+        {isPhoneSend ? <FinalTextBlock /> : <PhoneFormContainer />}
       </div>
     </div>
   );

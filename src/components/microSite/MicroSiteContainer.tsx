@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MicroSite } from 'components/microSite/MicroSite';
 import {
   setIsBannerShowedAC,
+  setIsPhoneValidateAC,
   setPhoneNumberAC,
-  validateNumberTC,
+  // validateNumberTC,
 } from 'store/app-reducer';
 import { AppRootStateType } from 'store/store';
 
@@ -14,8 +15,8 @@ export const MicroSiteContainer = React.memo((): ReactElement => {
   const dispatch = useDispatch();
   const symbolsLength = 10;
   const timeToShowBanner = 2;
-  const phoneRegion = 'RU';
-  const accessKey = '8e7aba359eaf9d94d1f9c3a620d9f628';
+  // const phoneRegion = 'RU';
+  // const accessKey = '8e7aba359eaf9d94d1f9c3a620d9f628';
 
   const isEnterPhoneScreenShowed = useSelector<AppRootStateType, boolean>(
     state => state.appReducer.IsEnterPhoneScreenShowed,
@@ -62,7 +63,8 @@ export const MicroSiteContainer = React.memo((): ReactElement => {
   }, [isVideoPlaying, dispatch]);
   useEffect(() => {
     if (phoneNumber.length === symbolsLength && isChecked) {
-      dispatch(validateNumberTC(accessKey, phoneNumber, phoneRegion));
+      // dispatch(validateNumberTC(accessKey, phoneNumber, phoneRegion));
+      dispatch(setIsPhoneValidateAC(true));
     }
   }, [phoneNumber, isChecked, dispatch]);
 

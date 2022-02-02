@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { MicroSiteContainer } from 'components/microSite/MicroSiteContainer';
 import { ButtonsControlType } from 'components/phoneForm/PhoneFormContainer';
+// import { Slider } from 'components/slider/Slider';
 import {
   setCheckBoxValueAC,
   setIsBannerShowedAC,

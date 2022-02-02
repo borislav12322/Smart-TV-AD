@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
 
-import s from './finalScreen.module.css';
+import s from './finalTextBlock.module.css';
 
-export const FinalScreen = (): ReactElement => (
+export const FinalTextBlock = (): ReactElement => (
   <div className={s.wrapper}>
     <h2 className={s.title}>ЗАЯВКА ПРИНЯТА</h2>
     <p className={s.text}>

@@ -21,7 +21,7 @@
     font-size: 32px;
     font-weight: 700;
     line-height: 38px;
-    cursor:auto;
+    cursor: auto;
     outline: none;
     color: #000000;
 }
@@ -83,7 +83,7 @@
     align-items: center;
 }
 
-.errorText{
+.errorText {
     color: #EA0000;
     font-weight: 500;
     font-size: 16px;
@@ -103,9 +103,7 @@
     height: 40px;
     outline: 2px solid #000000;
     background-color: transparent;
-
 }
-
 
 .checkBox::after {
     position: absolute;
@@ -130,7 +128,6 @@
     height: 16px;
     z-index: 10;
     display: none;
-
 }
 
 .checkBox:checked.checkBox::before {
@@ -149,7 +146,7 @@
     color: #4E4E4E;
 }
 
-.btn.active{
+.btn.active {
     background-color: #000000;
     color: #FFFFFF;
 }
@@ -158,4 +155,8 @@
     background-color: #000000;
     color: #FFFFFF;
     transition: all 0.4s ease;
+}
+
+.submitBtn:disabled:hover {
+    color: #4E4E4E;
 }

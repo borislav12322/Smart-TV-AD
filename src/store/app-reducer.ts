@@ -1,6 +1,6 @@
-import { Dispatch } from 'redux';
-
-import { phoneAPI } from 'DAL/phoneAPI';
+// import { Dispatch } from 'redux';
+//
+// import { phoneAPI } from 'DAL/phoneAPI';
 
 type ActionsType =
   | SetIsBannerShowedACType
@@ -150,20 +150,20 @@ export const setIsErrorShowedAC = (isError: boolean) =>
     isError,
   } as const);
 
-export const validateNumberTC =
-  (accessKey: string, number: string, countryCode: string) => (dispatch: Dispatch) => {
-    phoneAPI
-      .validatePhone(accessKey, number, countryCode)
-      .then(res => {
-        console.log(res.data);
-        if (res.data.valid === true) {
-          dispatch(setIsPhoneValidateAC(true));
-        } else {
-          dispatch(setIsPhoneValidateAC(false));
-          dispatch(setIsErrorShowedAC(true));
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
+// export const validateNumberTC =
+//   (accessKey: string, number: string, countryCode: string) => (dispatch: Dispatch) => {
+//     phoneAPI
+//       .validatePhone(accessKey, number, countryCode)
+//       .then(res => {
+//         console.log(res.data);
+//         if (res.data.valid === true) {
+//           dispatch(setIsPhoneValidateAC(true));
+//         } else {
+//           dispatch(setIsPhoneValidateAC(false));
+//           dispatch(setIsErrorShowedAC(true));
+//         }
+//       })
+//       .catch(err => {
+//         console.log(err);
+//       });
+//   };
