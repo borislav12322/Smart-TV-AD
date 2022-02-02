@@ -25,7 +25,7 @@ type InitialStateType = {
 
 const initialState: InitialStateType = {
   isBannerShowed: false,
-  IsEnterPhoneScreenShowed: true,
+  IsEnterPhoneScreenShowed: false,
   isVideoPlaying: true,
   isPhoneNumberSend: false,
   phoneNumber: '',

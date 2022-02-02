@@ -26,7 +26,7 @@ const initialState: InitialStateType = {
     { id: '120', value: 'ПОДТВЕРДИТЬ НОМЕР', className: 'btn' },
     { id: '130', value: 'Close', className: 'btn' },
   ],
-  keyPosition: '5',
+  keyPosition: '',
 };
 
 type ActionType = ChangeButtonPositionACType | ChangeKeyValueACType;

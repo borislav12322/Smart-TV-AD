@@ -13,6 +13,7 @@ import {
   setPhoneNumberAC,
   validateNumberTC,
 } from 'store/app-reducer';
+import { changeKeyValueAC } from 'store/PhoneForm-reducer';
 import { AppRootStateType } from 'store/store';
 
 export const MicroSiteContainer = (): ReactElement => {
@@ -80,6 +81,7 @@ export const MicroSiteContainer = (): ReactElement => {
     dispatch(setIsBannerShowedAC(false));
     dispatch(setIsEnterPhoneScreenShowedAC(true));
     dispatch(setIsVideoPlayingAC(false));
+    dispatch(changeKeyValueAC('5'));
   };
   const showFinalScreen = (): void => {
     dispatch(setIsPhoneNumberSendAC(true));

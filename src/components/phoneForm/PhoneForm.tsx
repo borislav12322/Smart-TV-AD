@@ -61,7 +61,11 @@ export const PhoneForm = ({
         <div className={s.controls}>
           {buttonsNumberArray.map(item => {
             const onClickHandle = (): void => {
-              addNumber(item.id);
+              if (item.id === '7' && phoneNumber.length === +'0') {
+                console.log('not seven');
+              } else {
+                addNumber(item.id);
+              }
             };
 
             return (

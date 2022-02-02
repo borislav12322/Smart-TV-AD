@@ -8,7 +8,9 @@ import { MicroSiteContainer } from 'components/microSite/MicroSiteContainer';
 import { ButtonsControlType } from 'components/phoneForm/PhoneFormContainer';
 import {
   setCheckBoxValueAC,
+  setIsBannerShowedAC,
   setIsEnterPhoneScreenShowedAC,
+  setIsErrorShowedAC,
   setIsPhoneNumberSendAC,
   setIsVideoPlayingAC,
   setPhoneNumberAC,
@@ -33,11 +35,17 @@ const App = (): ReactElement => {
   const isPhoneValidate = useSelector<AppRootStateType, boolean>(
     state => state.appReducer.isPhoneValidate,
   );
+  const isBannerShowed = useSelector<AppRootStateType, boolean>(
+    state => state.appReducer.isBannerShowed,
+  );
   const checkBoxValue = useSelector<AppRootStateType, boolean>(
     state => state.appReducer.checkBoxValue,
   );
   const isPhoneSend = useSelector<AppRootStateType, boolean>(
     state => state.appReducer.isPhoneNumberSend,
+  );
+  const isErrorShowed = useSelector<AppRootStateType, boolean>(
+    state => state.appReducer.isErrorShowed,
   );
 
   const focusOnApp = (): void => {
@@ -223,6 +231,18 @@ const App = (): ReactElement => {
       dispatch(changeKeyValueAC('0'));
       console.log('Arrow Right');
     }
+    if (keyValue === '100' && e.key === 'ArrowDown' && isErrorShowed) {
+      dispatch(changeKeyValueAC('100'));
+      console.log('Arrow Down');
+    }
+    if (
+      keyValue === '100' &&
+      (e.key === 'ArrowRight' || e.key === 'ArrowLeft' || e.key === 'ArrowUp') &&
+      (isErrorShowed || phoneNumber.length >= phoneLength)
+    ) {
+      dispatch(changeKeyValueAC('100'));
+      console.log('Arrow Right');
+    }
     if (keyValue === '110' && e.key === 'ArrowUp') {
       dispatch(changeKeyValueAC('100'));
       console.log('Arrow Up');
@@ -248,7 +268,7 @@ const App = (): ReactElement => {
       console.log('Arrow Down');
     }
 
-    if (keyValue === '130' && e.key === 'ArrowLeft') {
+    if (keyValue === '130' && e.key === 'ArrowLeft' && !isPhoneSend) {
       dispatch(changeKeyValueAC('6'));
       console.log('Arrow Left');
     }
@@ -256,40 +276,82 @@ const App = (): ReactElement => {
       e.stopPropagation();
       console.log('Arrow Right');
     }
+    if (
+      keyValue === '130' &&
+      (e.key === 'ArrowRight' ||
+        e.key === 'ArrowLeft' ||
+        e.key === 'ArrowDown' ||
+        e.key === 'ArrowUp') &&
+      isPhoneSend
+    ) {
+      e.stopPropagation();
+      console.log('Close Button');
+    }
 
-    if (keyValue === '1' && e.key === 'Enter') {
+    if (e.key === '1') {
+      dispatch(changeKeyValueAC('1'));
+    }
+    if (e.key === '2') {
+      dispatch(changeKeyValueAC('2'));
+    }
+    if (e.key === '3') {
+      dispatch(changeKeyValueAC('3'));
+    }
+    if (e.key === '4') {
+      dispatch(changeKeyValueAC('4'));
+    }
+    if (e.key === '5') {
+      dispatch(changeKeyValueAC('5'));
+    }
+    if (e.key === '6') {
+      dispatch(changeKeyValueAC('6'));
+    }
+    if (e.key === '7') {
+      dispatch(changeKeyValueAC('7'));
+    }
+    if (e.key === '8') {
+      dispatch(changeKeyValueAC('8'));
+    }
+    if (e.key === '9') {
+      dispatch(changeKeyValueAC('9'));
+    }
+    if (e.key === '0') {
+      dispatch(changeKeyValueAC('0'));
+    }
+
+    if ((keyValue === '1' && e.key === 'Enter') || e.key === '1') {
       if (phoneNumber.length < phoneLength) {
         dispatch(setPhoneNumberAC(`${phoneNumber}1`));
       }
     }
-    if (keyValue === '2' && e.key === 'Enter') {
+    if ((keyValue === '2' && e.key === 'Enter') || e.key === '2') {
       if (phoneNumber.length < phoneLength) {
         dispatch(setPhoneNumberAC(`${phoneNumber}2`));
       }
     }
-    if (keyValue === '3' && e.key === 'Enter') {
+    if ((keyValue === '3' && e.key === 'Enter') || e.key === '3') {
       if (phoneNumber.length < phoneLength) {
         dispatch(setPhoneNumberAC(`${phoneNumber}3`));
       }
     }
-    if (keyValue === '4' && e.key === 'Enter') {
+    if ((keyValue === '4' && e.key === 'Enter') || e.key === '4') {
       if (phoneNumber.length < phoneLength) {
         dispatch(setPhoneNumberAC(`${phoneNumber}4`));
       }
     }
-    if (keyValue === '5' && e.key === 'Enter') {
+    if ((keyValue === '5' && e.key === 'Enter') || e.key === '5') {
       if (phoneNumber.length < phoneLength) {
         dispatch(setPhoneNumberAC(`${phoneNumber}5`));
       }
     }
-    if (keyValue === '6' && e.key === 'Enter') {
+    if ((keyValue === '6' && e.key === 'Enter') || e.key === '6') {
       if (phoneNumber.length < phoneLength) {
         dispatch(setPhoneNumberAC(`${phoneNumber}6`));
       }
     }
     if (
       keyValue === '7' &&
-      e.key === 'Enter' &&
+      (e.key === 'Enter' || e.key === '7') &&
       phoneNumber.length !== defaultPhoneLength
     ) {
       if (phoneNumber.length < phoneLength) {
@@ -297,22 +359,22 @@ const App = (): ReactElement => {
         console.log('Enter 7');
       }
     }
-    if (keyValue === '8' && e.key === 'Enter') {
+    if ((keyValue === '8' && e.key === 'Enter') || e.key === '8') {
       if (phoneNumber.length < phoneLength) {
         dispatch(setPhoneNumberAC(`${phoneNumber}8`));
       }
     }
-    if (keyValue === '9' && e.key === 'Enter') {
+    if ((keyValue === '9' && e.key === 'Enter') || e.key === '9') {
       if (phoneNumber.length < phoneLength) {
         dispatch(setPhoneNumberAC(`${phoneNumber}9`));
       }
     }
-    if (keyValue === '0' && e.key === 'Enter') {
+    if ((keyValue === '0' && e.key === 'Enter') || e.key === '0') {
       if (phoneNumber.length < phoneLength) {
         dispatch(setPhoneNumberAC(`${phoneNumber}0`));
       }
     }
-    if (keyValue === '100' && e.key === 'Enter') {
+    if ((keyValue === '100' && e.key === 'Enter') || e.key === 'Backspace') {
       const newArr = phoneNumber.split('');
       newArr.pop();
       dispatch(setPhoneNumberAC(newArr.join('')));
@@ -334,11 +396,19 @@ const App = (): ReactElement => {
       dispatch(setIsVideoPlayingAC(true));
       console.log('close');
     }
+    if (isBannerShowed && e.key === 'Enter') {
+      dispatch(setIsBannerShowedAC(false));
+      dispatch(setIsEnterPhoneScreenShowedAC(true));
+      dispatch(setIsVideoPlayingAC(false));
+      dispatch(changeKeyValueAC('5'));
+    }
+    if (isErrorShowed && e.key === 'Enter' && keyValue === '100') {
+      dispatch(setIsErrorShowedAC(false));
+    }
   };
 
   useEffect(() => {
     focusOnApp();
-    // console.log(`button numpad is ${buttonNumpad}`);
     console.log(`key value is ${keyValue}`);
     console.log(`phone number is ${phoneNumber}`);
     console.log(`Checked is ${checkBoxValue}`);
@@ -354,6 +424,11 @@ const App = (): ReactElement => {
       dispatch(changeKeyValueAC('130'));
     }
   }, [isPhoneSend]);
+  useEffect(() => {
+    if (isErrorShowed) {
+      dispatch(changeKeyValueAC('100'));
+    }
+  }, [isErrorShowed]);
 
   return (
     <div
