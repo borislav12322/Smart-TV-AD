@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/smart-tv-ad/static/css/main.7a7f8ebc.css",
-    "main.js": "/smart-tv-ad/static/js/main.3e944582.js",
+    "main.js": "/smart-tv-ad/static/js/main.bda913cb.js",
     "static/js/787.f25ac57c.chunk.js": "/smart-tv-ad/static/js/787.f25ac57c.chunk.js",
     "static/media/volvo.mp4": "/smart-tv-ad/static/media/volvo.74796462ee4bc93573a3.mp4",
     "static/media/qr-code.jpeg": "/smart-tv-ad/static/media/qr-code.a7a6fa8b4e83e8b69a87.jpeg",
     "index.html": "/smart-tv-ad/index.html",
     "static/media/check.svg": "/smart-tv-ad/static/media/check.a4df113f80cd8e8af130.svg",
     "main.7a7f8ebc.css.map": "/smart-tv-ad/static/css/main.7a7f8ebc.css.map",
-    "main.3e944582.js.map": "/smart-tv-ad/static/js/main.3e944582.js.map",
+    "main.bda913cb.js.map": "/smart-tv-ad/static/js/main.bda913cb.js.map",
     "787.f25ac57c.chunk.js.map": "/smart-tv-ad/static/js/787.f25ac57c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7a7f8ebc.css",
-    "static/js/main.3e944582.js"
+    "static/js/main.bda913cb.js"
   ]
 }
