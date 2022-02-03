@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { MicroSiteContainer } from 'components/microSite/MicroSiteContainer';
 import { ButtonsControlType } from 'components/phoneForm/PhoneFormContainer';
-// import { Slider } from 'components/slider/Slider';
 import {
   setCheckBoxValueAC,
   setIsBannerShowedAC,
@@ -296,8 +295,7 @@ const App = (): ReactElement => {
       }
     }
     if (
-      keyValue === '7' &&
-      (e.key === 'Enter' || e.key === '7') &&
+      ((keyValue === '7' && e.key === 'Enter') || e.key === '7') &&
       phoneNumber.length !== defaultPhoneLength
     ) {
       if (phoneNumber.length < phoneLength) {

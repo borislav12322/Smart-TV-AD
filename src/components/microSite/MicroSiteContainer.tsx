@@ -65,6 +65,8 @@ export const MicroSiteContainer = React.memo((): ReactElement => {
     if (phoneNumber.length === symbolsLength && isChecked) {
       // dispatch(validateNumberTC(accessKey, phoneNumber, phoneRegion));
       dispatch(setIsPhoneValidateAC(true));
+    } else {
+      dispatch(setIsPhoneValidateAC(false));
     }
   }, [phoneNumber, isChecked, dispatch]);
 
