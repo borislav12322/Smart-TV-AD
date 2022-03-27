@@ -1,8 +1,7 @@
 import React, { ReactElement, useCallback, useEffect, useRef } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
-
 import { MicroSite } from 'components/microSite/MicroSite';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   setIsBannerShowedAC,
   setIsPhoneValidateAC,
@@ -32,6 +31,9 @@ export const MicroSiteContainer = React.memo((): ReactElement => {
   );
 
   const videoRef = useRef<HTMLVideoElement>(null);
+  // qeqweqw
+  // new
+  // fixes
 
   const pauseVideo = (): void | null =>
     videoRef && videoRef.current && videoRef.current.pause();
