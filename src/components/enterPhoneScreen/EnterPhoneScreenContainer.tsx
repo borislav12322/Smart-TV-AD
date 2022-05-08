@@ -19,7 +19,7 @@ export const EnterPhoneScreenContainer = React.memo((): ReactElement => {
     dispatch(setIsEnterPhoneScreenShowedAC(false));
     dispatch(setIsVideoPlayingAC(true));
     playVideo();
-  }, [videoRef, playVideo]);
+  }, [videoRef, playVideo, dispatch]);
 
   return <EnterPhoneScreen isPhoneSend={isPhoneSend} closeWindow={closeWindow} />;
 });

@@ -9,7 +9,7 @@ import {
   setIsPhoneNumberSendAC,
   setPhoneNumberAC,
 } from 'store/app-reducer';
-import { changeKeyValueAC } from 'store/PhoneForm-reducer';
+import { changeButtonPositionAC, changeKeyValueAC } from 'store/PhoneForm-reducer';
 import { AppRootStateType } from 'store/store';
 
 export type ButtonsControlType = {
@@ -69,6 +69,9 @@ export const PhoneFormContainer = React.memo((): ReactElement => {
     dispatch(changeKeyValueAC(id));
     dispatch(setPhoneNumberAC(phoneNumber + id));
   };
+  const onMouseMoveHandle = (id: string): void => {
+    dispatch(changeKeyValueAC(id));
+  };
 
   useEffect(() => {
     dispatch(setPhoneNumberAC(phoneNumber));
@@ -76,8 +79,9 @@ export const PhoneFormContainer = React.memo((): ReactElement => {
   useEffect(() => {
     if (phoneNumber.length >= symbolsLength) {
       dispatch(changeKeyValueAC('100'));
+      dispatch(changeButtonPositionAC('100'));
     }
-  }, [phoneNumber, dispatch]);
+  }, [dispatch, phoneNumber, symbolsLength]);
 
   return (
     <PhoneForm
@@ -96,6 +100,7 @@ export const PhoneFormContainer = React.memo((): ReactElement => {
       buttonSend={buttonSend}
       addNumber={addNumber}
       buttonDelete={buttonDelete}
+      onMouseMoveHandle={onMouseMoveHandle}
     />
   );
 });

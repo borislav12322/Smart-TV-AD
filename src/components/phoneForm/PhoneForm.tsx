@@ -22,6 +22,7 @@ type PropsType = {
   buttonDelete: ButtonsControlType[];
   keyValue: string;
   addNumber: (id: string) => void;
+  onMouseMoveHandle: (id: string) => void;
 };
 
 export const PhoneForm = ({
@@ -40,6 +41,7 @@ export const PhoneForm = ({
   addNumber,
   buttonDelete,
   defaultNumberCount,
+  onMouseMoveHandle,
 }: PropsType): ReactElement => (
   <div className={s.formContainer}>
     <div className={s.wrapper}>
@@ -60,7 +62,7 @@ export const PhoneForm = ({
           {buttonsNumberArray.map(item => {
             const onClickHandle = (): void => {
               if (item.id === '7' && phoneNumber.length === defaultNumberCount) {
-                console.log('not seven');
+                // console.log('not seven');
               } else {
                 addNumber(item.id);
               }
@@ -73,6 +75,7 @@ export const PhoneForm = ({
                 key={item.id}
                 onClick={onClickHandle}
                 disabled={phoneNumber.length >= symbolsLength}
+                onMouseMove={() => onMouseMoveHandle(item.id)}
               >
                 {item.value}
               </button>
@@ -88,6 +91,7 @@ export const PhoneForm = ({
                 className={item.className}
                 onClick={onClickHandle}
                 key={item.id}
+                onMouseMove={() => onMouseMoveHandle(item.id)}
               >
                 {item.value}
               </button>
@@ -101,7 +105,7 @@ export const PhoneForm = ({
           }}
         >
           {!isErrorShowed ? (
-            <label htmlFor="phoneForm" className={s.checkBoxLabel}>
+            <label htmlFor="110" className={s.checkBoxLabel}>
               {checkboxItem.map(item => (
                 <input
                   key={item.id}

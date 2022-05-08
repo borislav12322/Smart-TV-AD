@@ -1,3 +1,5 @@
+import { Dispatch } from 'redux';
+
 import { ButtonsControlType } from 'components/phoneForm/PhoneFormContainer';
 
 type InitialStateType = {
@@ -29,7 +31,10 @@ const initialState: InitialStateType = {
   keyPosition: '',
 };
 
-type ActionType = ChangeButtonPositionACType | ChangeKeyValueACType;
+type ActionType =
+  | ChangeButtonPositionACType
+  | ChangeKeyValueACType
+  | AddButtonPressAnimationACType;
 
 export const PhoneFormReducer = (
   state: InitialStateType = initialState,
@@ -49,6 +54,17 @@ export const PhoneFormReducer = (
           ...state.buttonsControl.map(item =>
             item.id === action.id
               ? { ...item, className: 'btn active' }
+              : { ...item, className: 'btn' },
+          ),
+        ],
+      };
+    case 'CHANGE-BUTTON-PRESS-ANIMATION':
+      return {
+        ...state,
+        buttonsControl: [
+          ...state.buttonsControl.map(item =>
+            item.id === action.id
+              ? { ...item, className: 'btn active clicked' }
               : { ...item, className: 'btn' },
           ),
         ],
@@ -73,3 +89,20 @@ export const changeButtonPositionAC = (id: string) =>
     type: 'CHANGE-BUTTON-POSITION',
     id,
   } as const);
+
+export type AddButtonPressAnimationACType = ReturnType<typeof addButtonPressAnimationAC>;
+
+export const addButtonPressAnimationAC = (id: string) =>
+  ({
+    type: 'CHANGE-BUTTON-PRESS-ANIMATION',
+    id,
+  } as const);
+
+export const buttonAnimationTC = (id: string) => (dispatch: Dispatch) => {
+  const timeForButtonAnimation = 200;
+  dispatch(changeKeyValueAC(id));
+  dispatch(addButtonPressAnimationAC(id));
+  setTimeout(() => {
+    dispatch(changeButtonPositionAC(id));
+  }, timeForButtonAnimation);
+};

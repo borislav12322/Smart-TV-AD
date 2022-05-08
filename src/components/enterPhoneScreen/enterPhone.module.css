@@ -24,7 +24,7 @@
     color: #FFFFFF!important;
 }
 
-.btnClose:hover{
+button.btnClose:hover{
     background-color: #000000;
     color: #FFFFFF;
     transition: all 0.4s ease;
