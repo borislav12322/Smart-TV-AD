@@ -31,7 +31,6 @@ export const MicroSiteContainer = React.memo((): ReactElement => {
   );
 
   const videoRef = useRef<HTMLVideoElement>(null);
-  // qeqweqw
 
   const pauseVideo = (): void | null =>
     videoRef && videoRef.current && videoRef.current.pause();
