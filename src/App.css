@@ -20,6 +20,8 @@
     font-weight: 500;
     font-size: 16px;
     cursor: pointer;
+    color: #565656;
+
 }
 .btn:focus{
     color: #86D3F4;
